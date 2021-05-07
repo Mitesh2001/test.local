@@ -63,5 +63,8 @@
         @endforeach
     </tbody>
     </table>
+    <span class="page">
+        {{$assignements->links()}}
+    </span>
 </div>
 @endsection

@@ -14,7 +14,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        return view('class', ['classes' =>  Classes::all()]);
+        return view('class', ['classes' =>  Classes::paginate(4)]);
     }
 
     /**

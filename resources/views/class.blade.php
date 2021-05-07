@@ -59,5 +59,8 @@
         @endforeach
     </tbody>
     </table>
+    <span>
+        {{$classes->links()}}
+    </span>
 </div>
 @endsection

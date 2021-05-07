@@ -14,7 +14,7 @@ class AssignementController extends Controller
      */
     public function index()
     {
-        return view('assignement', ['assignements' => Assignement::all()]);
+        return view('assignement', ['assignements' => Assignement::paginate(4)]);
     }
 
     /**
