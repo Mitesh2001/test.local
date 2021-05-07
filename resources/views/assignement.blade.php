@@ -2,7 +2,13 @@
 @section('title','Index')
 @section('content')
 <div class="container my-5">
-    <table class="table table-hover">
+    @if ($message = Session::get('success'))
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <table class="table table-hover text-center">
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -12,6 +18,7 @@
         <th scope="col">Submission Date</th>
         <th scope="col">Submission Time</th>
         <th scope="col">Maximum Marks</th>
+        <th scope="col">File</th>
         <th scope="col">Action</th>
         <th scope="col">
             <a href="{{route('assignement.create')}}">Add Assignement <i class="fa fa-plus-square"></i></a>

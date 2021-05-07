@@ -47,7 +47,8 @@ class AssignementController extends Controller
             'max_marks' => $request->max_marks,
             'file' => $request->file->getClientOriginalName()
         ]);
-        return redirect()->route('assignement.index');
+        return redirect()->route('assignement.index')->with('success', 'Data Inserted !');
+        ;
     }
 
     /**
@@ -82,7 +83,7 @@ class AssignementController extends Controller
     public function update(Request $request, $id)
     {
         Assignement::where('id', $id)->update($request->except('_token', '_method'));
-        return redirect()->route('assignement.index');
+        return redirect()->route('assignement.index')->with('success', 'Data Updated !');
     }
 
     /**
@@ -94,6 +95,7 @@ class AssignementController extends Controller
     public function destroy($id)
     {
         Assignement::where('id', $id)->delete();
-        return redirect()->route('assignement.index');
+        return redirect()->route('assignement.index')->with('success', 'Data Deleted !');
+        ;
     }
 }
