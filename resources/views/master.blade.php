@@ -8,7 +8,7 @@
     <title>@yield("title")</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container my-3">
     @include('header')
     </div>
     @yield("content")

@@ -19,6 +19,13 @@
         </tr>
     </thead>
     <tbody>
+        @if($assignements->count() < 1)
+        <tr>
+            <td colspan="8" class="text-center text-danger">
+                No Data Found ! <a class="text-danger" style="text-decoration: none;" href="{{route('assignement.create')}}">Add Some Data</a>
+            </td>
+        </tr>
+        @endif
         @foreach($assignements as $assignement)
         <tr>
         <td>{{$assignement->id}}</td>

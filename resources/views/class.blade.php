@@ -2,7 +2,13 @@
 @section('title','Index')
 @section('content')
 <div class="container my-5">
-    <table class="table table-hover">
+    @if ($message = Session::get('success'))
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <table class="table table-hover text-center">
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -18,6 +24,13 @@
         </tr>
     </thead>
     <tbody>
+        @if($classes->count() < 1)
+        <tr>
+            <td colspan="8" class="text-center text-danger">
+                No Data Found ! <a class="text-danger" style="text-decoration: none;" href="{{route('class.create')}}">Add Some Data</a>
+            </td>
+        </tr>
+        @endif
         @foreach($classes as $class)
         <tr>
         <td>{{$class->id}}</td>
@@ -29,7 +42,7 @@
         <td>
             <a href="{{route('class.show',$class->id)}}">
                <button class="btn btn-primary">
-                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-edit"></i> Update
                 </button>
             </a>
         </td>
@@ -37,7 +50,7 @@
             <form action="{{route('class.destroy',$class->id)}}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn btn-outline-danger">
                     <i class="fa fa-trash"></i>
                 </button>
             </form>

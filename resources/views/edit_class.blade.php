@@ -35,7 +35,9 @@
                 <hr>
                 <div class=" d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{route('class.index')}}" class="btn btn-primary">Back</a>
+                    <a href="{{route('class.index')}}" class="btn btn-outline-info">
+                        <i class="fa fa-backward"></i> Back To Home
+                    </a>
                 </div>
             </form>
         </div>

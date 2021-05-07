@@ -36,7 +36,7 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         Classes::create($request->all());
-        return view('class', ['classes' =>  Classes::all()]);
+        return redirect()->route('class.index')->with('success', 'Data Inserted !');
     }
 
     /**
@@ -72,7 +72,7 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         Classes::where('id', $id)->update(request()->except(['_token','_method']));
-        return redirect()->route('class.index');
+        return redirect()->route('class.index')->with('success', 'Updated !');
     }
 
     /**
@@ -84,6 +84,6 @@ class ClassController extends Controller
     public function destroy($id)
     {
         Classes::where('id', $id)->delete();
-        return redirect()->route('class.index');
+        return redirect()->route('class.index')->with('success', 'Deleted !');
     }
 }
