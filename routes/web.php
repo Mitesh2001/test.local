@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('class', ClassController::class);
 Route::resource('assignement', AssignementController::class);
+Route::get('/', function () {
+    return redirect()->route('class.index');
+});

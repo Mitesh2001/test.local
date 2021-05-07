@@ -8,8 +8,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    <table class="table table-hover text-center">
-    <thead>
+    <table class="table table-hover text-center table-striped">
+    <thead class="border">
         <tr>
         <th scope="col">#</th>
         <th scope="col">Classes_id</th>
@@ -25,7 +25,7 @@
         </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class=" border">
         @if($assignements->count() < 1)
         <tr>
             <td colspan="8" class="text-center text-danger">

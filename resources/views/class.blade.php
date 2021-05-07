@@ -8,7 +8,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    <table class="table table-hover text-center">
+    <table class="table table-hover text-center table-striped">
     <thead>
         <tr>
         <th scope="col">#</th>
