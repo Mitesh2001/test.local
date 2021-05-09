@@ -2,9 +2,9 @@
 @section('title','Create Assignements')
 @section("content")
 <div class="container">
-    <div class="row border rounded justify-content-center m-5 p-5">
+    <div class="row border border-dark rounded justify-content-center m-5 p-5">
         <h2 class="text-center">Update Assignement</h2>
-        <form method="POST" action="{{route('assignement.update',$assignement->id)}}" class="col-8">
+        <form method="POST" action="{{route('assignement.update',$assignement->id)}}" class="col-8" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group my-3">
@@ -56,6 +56,15 @@
                 <input type="text" name="max_marks" class="form-control" value="{{$assignement->max_marks}}">
                 <small class="text-danger">
                     @error('max_marks')
+                        <span class="text-red-500 text-xs"><i class="fa fa-bug"></i> {{ $message }}</span>
+                    @enderror
+                </small>
+            </div>
+            <div class="form-group my-3">
+                <label class="form-label">File:</label>
+                <input type="file" name="file" class="form-control">
+                <small class="text-danger">
+                    @error('file')
                         <span class="text-red-500 text-xs"><i class="fa fa-bug"></i> {{ $message }}</span>
                     @enderror
                 </small>

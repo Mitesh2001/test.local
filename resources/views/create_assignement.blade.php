@@ -2,7 +2,7 @@
 @section('title','Create Assignements')
 @section("content")
 <div class="container">
-    <div class="row border rounded justify-content-center m-5 p-5">
+    <div class="row border border-dark rounded justify-content-center m-5 p-5">
         <h2 class="text-center">Add Assignement</h2>
         <form method="POST" action="{{route('assignement.store')}}" enctype="multipart/form-data" class="col-8">
             @csrf

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AssignementController extends Controller
 {
@@ -91,9 +92,22 @@ class AssignementController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->file) {
+            $file = Assignement::where('id', $id)->first()->file;
+            Storage::delete('public/uploads/'.$file);
+            $request->file('file')->storeAs('uploads', $request->file->getClientOriginalName(), 'public');
+        }
         $this->rules['file'] = '';
         $request->validate($this->rules);
-        Assignement::where('id', $id)->update($request->except('_token', '_method'));
+        Assignement::where('id', $id)->update([
+            'classes_id' => $request->classes_id,
+            'topic' => $request->topic,
+            'description' => $request->description,
+            'submission_date' => $request->submission_date,
+            'submission_time' => $request->submission_time,
+            'max_marks' => $request->max_marks,
+            'file' => $request->file->getClientOriginalName()
+        ]);
         return redirect()->route('assignement.index')->with('success', 'Data Updated !');
     }
 
@@ -105,7 +119,19 @@ class AssignementController extends Controller
      */
     public function destroy($id)
     {
+        $file = Assignement::where('id', $id)->first()->file;
+        Storage::delete('public/uploads/'.$file);
         Assignement::where('id', $id)->delete();
         return redirect()->route('assignement.index')->with('success', 'Data Deleted !');
+    }
+
+    public function downloadFile($id)
+    {
+        $file = Assignement::where('id', $id)->first()->file;
+        if (Storage::exists('public/uploads/'.$file)) {
+            return Storage::download('public/uploads/'.$file);
+        } else {
+            return redirect()->route('assignement.index')->with('success', 'File not Available !');
+        }
     }
 }
