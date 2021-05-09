@@ -49,10 +49,10 @@
             </a>
         </td>
         <td>
-            <form action="{{route('assignement.destroy',$assignement->id)}}" method="post">
+            <form action="{{route('assignement.destroy',$assignement->id)}}" method="post" id="{{$assignement->id}}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">
+                <button type="button" onclick="confirmDelete(<?php echo $assignement->id ?>)" class="btn btn-danger">
                     <i class="fa fa-trash"></i>
                 </button>
             </form>

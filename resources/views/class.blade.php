@@ -47,10 +47,10 @@
             </a>
         </td>
         <td>
-            <form action="{{route('class.destroy',$class->id)}}" method="post">
+            <form action="{{route('class.destroy',$class->id)}}" method="post" id="{{$class->id}}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-outline-danger">
+                <button type="button" onclick="confirmDelete(<?php echo $class->id ?>)" class="btn btn-outline-danger">
                     <i class="fa fa-trash"></i>
                 </button>
             </form>
