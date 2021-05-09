@@ -61,8 +61,8 @@
         @endforeach
     </tbody>
     </table>
-    <span class="page">
+    <div class="d-flex justify-content-center">
         {{$assignements->links()}}
-    </span>
+    </div>
 </div>
 @endsection
