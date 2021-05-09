@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class AssignementController extends Controller
 {
+    public $rules = [
+        'classes_id' => 'required',
+        'topic' => 'required',
+        'description' => 'required',
+        'submission_date' => 'required',
+        'submission_time' => 'required',
+        'max_marks' => 'required|numeric',
+        'file' => 'required'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +44,7 @@ class AssignementController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->rules);
         if ($request->file()) {
             $request->file('file')->storeAs('uploads', $request->file->getClientOriginalName(), 'public');
         }
@@ -48,7 +58,6 @@ class AssignementController extends Controller
             'file' => $request->file->getClientOriginalName()
         ]);
         return redirect()->route('assignement.index')->with('success', 'Data Inserted !');
-        ;
     }
 
     /**
@@ -82,6 +91,8 @@ class AssignementController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->rules['file'] = '';
+        $request->validate($this->rules);
         Assignement::where('id', $id)->update($request->except('_token', '_method'));
         return redirect()->route('assignement.index')->with('success', 'Data Updated !');
     }
@@ -96,6 +107,5 @@ class AssignementController extends Controller
     {
         Assignement::where('id', $id)->delete();
         return redirect()->route('assignement.index')->with('success', 'Data Deleted !');
-        ;
     }
 }

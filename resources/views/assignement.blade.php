@@ -11,7 +11,6 @@
     <table class="table table-hover text-center table-striped">
     <thead class="border">
         <tr>
-        <th scope="col">#</th>
         <th scope="col">Classes_id</th>
         <th scope="col">Topic</th>
         <th scope="col">Description</th>
@@ -21,7 +20,7 @@
         <th scope="col">File</th>
         <th scope="col">Action</th>
         <th scope="col">
-            <a href="{{route('assignement.create')}}">Add Assignement <i class="fa fa-plus-square"></i></a>
+            <a href="{{route('assignement.create')}}">Add <i class="fa fa-plus-square"></i></a>
         </th>
         </tr>
     </thead>
@@ -35,7 +34,6 @@
         @endif
         @foreach($assignements as $assignement)
         <tr>
-        <td>{{$assignement->id}}</td>
         <td>{{$assignement->classes_id}}</td>
         <td>{{$assignement->topic}}</td>
         <td>{{$assignement->description}}</td>
@@ -46,7 +44,7 @@
         <td>
             <a href="{{route('assignement.show',$assignement->id)}}">
                <button class="btn btn-primary">
-                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-edit"></i>Update
                 </button>
             </a>
         </td>
