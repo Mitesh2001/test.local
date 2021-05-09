@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ClassController extends Controller
 {
+    public $rules = [
+        'teacher_name' => 'required',
+        'batch_name' => 'required',
+        'subject' => 'required',
+        'classroom_key' => 'required|unique:App\Models\Classes,classroom_key',
+        'status' => 'required'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +44,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->rules);
         Classes::create($request->all());
         return redirect()->route('class.index')->with('success', 'Data Inserted !');
     }
@@ -71,6 +81,8 @@ class ClassController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->rules['classroom_key'] = 'required';
+        $request->validate($this->rules);
         Classes::where('id', $id)->update(request()->except(['_token','_method']));
         return redirect()->route('class.index')->with('success', 'Updated !');
     }
