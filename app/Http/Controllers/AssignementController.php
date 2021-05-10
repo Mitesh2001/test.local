@@ -93,21 +93,31 @@ class AssignementController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->file) {
+            $request->validate($this->rules);
+            Assignement::where('id', $id)->update([
+                'classes_id' => $request->classes_id,
+                'topic' => $request->topic,
+                'description' => $request->description,
+                'submission_date' => $request->submission_date,
+                'submission_time' => $request->submission_time,
+                'max_marks' => $request->max_marks,
+                'file' => $request->file->getClientOriginalName()
+            ]);
             $file = Assignement::where('id', $id)->first()->file;
             Storage::delete('public/uploads/'.$file);
             $request->file('file')->storeAs('uploads', $request->file->getClientOriginalName(), 'public');
+        } else {
+            $this->rules['file'] = '';
+            $request->validate($this->rules);
+            Assignement::where('id', $id)->update([
+                'classes_id' => $request->classes_id,
+                'topic' => $request->topic,
+                'description' => $request->description,
+                'submission_date' => $request->submission_date,
+                'submission_time' => $request->submission_time,
+                'max_marks' => $request->max_marks
+            ]);
         }
-        $this->rules['file'] = '';
-        $request->validate($this->rules);
-        Assignement::where('id', $id)->update([
-            'classes_id' => $request->classes_id,
-            'topic' => $request->topic,
-            'description' => $request->description,
-            'submission_date' => $request->submission_date,
-            'submission_time' => $request->submission_time,
-            'max_marks' => $request->max_marks,
-            'file' => $request->file->getClientOriginalName()
-        ]);
         return redirect()->route('assignement.index')->with('success', 'Data Updated !');
     }
 
